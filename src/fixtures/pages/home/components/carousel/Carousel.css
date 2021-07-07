@@ -1,0 +1,38 @@
+.carousel-caption-outer {
+	color: #fefefe;
+	font-size: 12px;
+	position: absolute;
+	bottom: 0;
+	padding: 10px;
+	left: 0;
+	right: 0;
+	background-image: linear-gradient(transparent, #000);
+	height: 50%;
+}
+.carousel-caption {
+	left: 5% !important;
+	text-align: left !important;
+	padding-bottom: 0.5rem !important;
+}
+.carousel-caption > h3 {
+	margin-bottom: 0 !important;
+}
+.carousel-image {
+	height: 42vw;
+}
+.carousel-indicators {
+	margin-bottom: 0 !important;
+}
+.carousel-indicators > button {
+	background-color: #ff3349 !important;
+	height: 4px !important;
+}
+
+@media only screen and (max-width: 600px) {
+	.carousel {
+		margin-top: 50px;
+	}
+	.carousel-image {
+		height: 55vw;
+	}
+}

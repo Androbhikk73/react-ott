@@ -1,19 +1,13 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
-import {
-	NavBar,
-	Carousel,
-	MultiPotrait,
-	SingleImage,
-	MultiLandscape,
-} from "./components";
-import { base_url, req_header } from "../../constant";
+import { base_url, req_header } from "../constant";
+import { NavBar, Footer } from "./components";
+import { Home } from "./pages";
 
-const Home = () => {
+const Fixture = () => {
 	const [videoGenre, setVideoGenre] = React.useState([]);
 	const [songGenre, setSongGenre] = React.useState([]);
-	const [carouselData, setCarouselData] = React.useState([]);
-	const [section, setSection] = React.useState([]);
 
 	const fetchGenre = React.useCallback(async () => {
 		await axios
@@ -22,7 +16,7 @@ const Home = () => {
 				{},
 				{
 					headers: req_header,
-				}
+				},
 			)
 			.then((res) => {
 				let modelMovieGenre = res.data.modelMovieGenre;
@@ -33,23 +27,6 @@ const Home = () => {
 
 				genres.map((g) => (mg.includes(g.id) ? gD.push(g) : null));
 				setVideoGenre(gD);
-			});
-	}, []);
-
-	const fetchSection = React.useCallback(async () => {
-		await axios
-			.post(
-				`${base_url}General/GetSection`,
-				{ categoryId: 1 },
-				{
-					headers: req_header,
-				}
-			)
-			.then((res) => {
-				let resCarouselData = res.data.carousel;
-				let resSectionData = res.data.section;
-				setCarouselData(resCarouselData);
-				setSection(resSectionData);
 			});
 	}, []);
 
@@ -76,19 +53,19 @@ const Home = () => {
 
 		// Get Movie Genre
 		fetchGenre();
-		// Get Section Data
-		fetchSection();
-	}, [fetchGenre, fetchSection]);
+	}, [fetchGenre]);
 
 	return (
-		<>
+		<Router>
 			<NavBar videoGenre={videoGenre} songGenre={songGenre} />
-			<Carousel cData={carouselData} />
-			<MultiPotrait />
-			<SingleImage />
-			<MultiLandscape />
-		</>
+			<Switch>
+				<Route exact path='/'>
+					<Home />
+				</Route>
+			</Switch>
+			<Footer />
+		</Router>
 	);
 };
 
-export default Home;
+export default Fixture;

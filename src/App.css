@@ -13,12 +13,11 @@ body::-webkit-scrollbar {
 	-ms-overflow-style: none; 
 	scrollbar-width: none;
 } */
-a {
-	transition: all 0.3s ease 0s;
-	text-decoration: none !important;
-}
+
 a:link {
 	font-size: 14px;
+	transition: all 0.3s ease 0s;
+	text-decoration: none !important;
 }
 a:hover,
 a:focus {
