@@ -8,3 +8,10 @@ h6.heading-content {
 	color: #ff3349;
 	font-size: 0.85rem;
 }
+a.heading-content {
+	color: #ff3349;
+	font-size: 0.85rem;
+}
+a.heading-content:hover {
+	color: #ff3349;
+}

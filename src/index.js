@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 import "bootstrap/dist/css/bootstrap.css";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 ReactDOM.render(
 	<React.StrictMode>
