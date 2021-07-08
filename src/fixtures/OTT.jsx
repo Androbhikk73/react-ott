@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
 import { base_url, req_header } from "../constant";
 import { NavBar, Footer } from "./components";
-import { Home } from "./pages";
+import { Home, Movies, Videos } from "./pages";
 
 const Fixture = () => {
 	const [videoGenre, setVideoGenre] = React.useState([]);
@@ -16,7 +16,7 @@ const Fixture = () => {
 				{},
 				{
 					headers: req_header,
-				},
+				}
 			)
 			.then((res) => {
 				let modelMovieGenre = res.data.modelMovieGenre;
@@ -59,8 +59,14 @@ const Fixture = () => {
 		<Router>
 			<NavBar videoGenre={videoGenre} songGenre={songGenre} />
 			<Switch>
-				<Route exact path='/'>
+				<Route exact path="/">
 					<Home />
+				</Route>
+				<Route exact path="/movies/:id">
+					<Movies />
+				</Route>
+				<Route exact path="/videos/:id">
+					<Videos />
 				</Route>
 			</Switch>
 			<Footer />

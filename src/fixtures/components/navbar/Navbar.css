@@ -14,10 +14,16 @@
 .nav-link:hover {
 	color: #ff3349 !important;
 }
+.dropdown-item.active,
+.dropdown-item:active {
+	background-color: transparent !important;
+}
 .dropdown-item:focus,
 .dropdown-item:hover {
-	background-color: #283747 !important;
-	color: #ff3349 !important;
+	background-color: #ff3349 !important;
+	/* background-color: #283747 !important;  */
+	/* color: #ff3349 !important; */
+	color: #ecf0f1 !important;
 }
 .nav-link.active {
 	color: #ff3349 !important;

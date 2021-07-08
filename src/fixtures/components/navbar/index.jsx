@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Nav, NavDropdown } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { X, List, Search, FileEarmarkPersonFill } from "react-bootstrap-icons";
@@ -19,40 +20,85 @@ const ONavbar = ({ videoGenre, songGenre }) => {
 
 	return (
 		<>
-			<Navbar collapseOnSelect expand='lg' bg='dark' variant='dark' fixed='top'>
+			<Navbar
+				collapseOnSelect
+				expand="lg"
+				bg="dark"
+				variant="dark"
+				fixed="top"
+			>
 				<Container fluid className={menuOpen && "bg-dark-sm"}>
-					<Navbar.Brand href='/'>
-						<img src={`${site_url}siteasset/img/logo.png`} alt='' width='80' height='20' />
-					</Navbar.Brand>
-					<Navbar.Toggle aria-controls='responsive-navbar-nav' onClick={() => _toggleMenu()}>
-						{menuOpen ? <X className='bi-x' /> : <List className='bi-list' />}
+					<LinkContainer to="/">
+						<Navbar.Brand>
+							<img
+								src={`${site_url}siteasset/img/logo.png`}
+								alt=""
+								width="80"
+								height="20"
+							/>
+						</Navbar.Brand>
+					</LinkContainer>
+
+					<Navbar.Toggle
+						aria-controls="responsive-navbar-nav"
+						onClick={() => _toggleMenu()}
+					>
+						{menuOpen ? (
+							<X className="bi-x" />
+						) : (
+							<List className="bi-list" />
+						)}
 					</Navbar.Toggle>
-					<Navbar.Collapse id='responsive-navbar-nav'>
-						<Nav className='me-auto'>
+					<Navbar.Collapse id="responsive-navbar-nav">
+						<Nav className="me-auto">
 							<Nav.Link href={`${site_url}`}>Home</Nav.Link>
-							<NavDropdown title='Movies' id='collasible-nav-dropdown'>
+							<NavDropdown
+								title="Movies"
+								id="collasible-nav-dropdown"
+							>
 								{videoGenre.map((vG, i) => (
-									<NavDropdown.Item key={i} href={`${site_url}${vG.id}`}>
-										{vG.title}
-									</NavDropdown.Item>
+									// <NavDropdown.Item key={i} href={`${site_url}${vG.id}`}>
+									<LinkContainer
+										to={`/movies/${vG.id}`}
+										key={i}
+									>
+										<NavDropdown.Item>
+											{vG.title}
+										</NavDropdown.Item>
+									</LinkContainer>
 								))}
 							</NavDropdown>
 							<Nav.Link href={`${site_url}shows`}>Shows</Nav.Link>
-							<NavDropdown title='Songs' id='collasible-nav-dropdown'>
+							<NavDropdown
+								title="Songs"
+								id="collasible-nav-dropdown"
+							>
 								{songGenre.map((sG, i) => (
-									<NavDropdown.Item key={i} href={`${site_url}${sG.link}`}>
-										{sG.title}
-									</NavDropdown.Item>
+									<LinkContainer
+										to={`${site_url}${sG.link}`}
+										key={i}
+									>
+										<NavDropdown.Item>
+											{sG.title}
+										</NavDropdown.Item>
+									</LinkContainer>
 								))}
 							</NavDropdown>
 							<Nav.Link href={`${site_url}kids`}>Kids</Nav.Link>
 						</Nav>
 						<Nav>
-							<Nav.Link href='#search'>
+							<Nav.Link href="#search">
 								<Search size={20} />
 							</Nav.Link>
-							<Nav.Link eventKey={2} href='#' onClick={handleShow}>
-								<FileEarmarkPersonFill size={20} color='#ff3349' />
+							<Nav.Link
+								eventKey={2}
+								href="#"
+								onClick={handleShow}
+							>
+								<FileEarmarkPersonFill
+									size={20}
+									color="#ff3349"
+								/>
 							</Nav.Link>
 						</Nav>
 					</Navbar.Collapse>
@@ -63,7 +109,10 @@ const ONavbar = ({ videoGenre, songGenre }) => {
 				<Offcanvas.Header closeButton>
 					<Offcanvas.Title>Offcanvas</Offcanvas.Title>
 				</Offcanvas.Header>
-				<Offcanvas.Body>Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.</Offcanvas.Body>
+				<Offcanvas.Body>
+					Some text as placeholder. In real life you can have the
+					elements you have chosen. Like, text, images, lists, etc.
+				</Offcanvas.Body>
 			</Offcanvas>
 		</>
 	);
