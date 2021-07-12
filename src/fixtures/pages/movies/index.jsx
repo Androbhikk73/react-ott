@@ -5,8 +5,9 @@ import axios from "axios";
 import { base_url, site_url, req_header } from "../../../constant";
 import "./Movie.css";
 
-const Movies = () => {
+const Movies = ({ videoGenre }) => {
 	let { id } = useParams();
+	const [type, setType] = React.useState("");
 	const [movieList, setMovieList] = React.useState([]);
 
 	const getMovieList = React.useCallback(async () => {
@@ -27,93 +28,49 @@ const Movies = () => {
 	}, [id]);
 
 	React.useEffect(() => {
+		videoGenre.map((g) => (g.id === id ? setType(g.title) : ""));
+
 		// Get Movie List by Genre
 		getMovieList();
-	}, [getMovieList]);
+	}, [getMovieList, videoGenre, id]);
 
 	return (
-		<Container fluid className="px-2 py-2">
+		<Container fluid className='px-2 pt-5 pb-2 mt-3'>
+			<div className='px-1 pt-2 align-items-center heading-container'>
+				<h5 className='heading-content'>Search Movies for {type}</h5>
+			</div>
 			{movieList.length > 0 ? (
-				<>
-					<div className="d-flex px-1 pt-2 justify-content-between align-items-center heading-container">
-						<h5 className="heading-content">
-							Search Movies for Action
-						</h5>
-					</div>
-					<div className="d-flex px-2 py-3">
-						{movieList.map((v, i) => {
-							var free_item_class = v.isPaid
-								? ""
-								: "is-paid-false";
+				<Container fluid className='mt-2 px-2 d-flex flex-wrap'>
+					{movieList.map((v, i) => {
+						var free_item_class = v.isPaid ? "" : "is-paid-false";
 
-							return (
-								<a href="/" key={i}>
+						return (
+							<a href='/' key={i} className='my-2'>
+								<div className='section-video-item slick'>
 									<div
-										className="section-video-item slick"
+										className={`poster ${free_item_class}`}
 										style={{
-											width: "188px",
-										}}
-									>
-										<div
-											className={`poster ${free_item_class}`}
-											style={{
-												backgroundImage: `url(${site_url}uploads/${v.posterImage})`,
-											}}
-										></div>
-										<div
-											style={{
-												marginTop: "135%",
-											}}
-										></div>
-										<div className="video-outer">
-											<div className="video-info">
-												<div className="info-title">
-													{v.title}
-												</div>
-											</div>
+											backgroundImage: `url(${site_url}uploads/${v.posterImage})`,
+										}}></div>
+									<div
+										style={{
+											marginTop: "135%",
+										}}></div>
+									<div className='video-outer'>
+										<div className='video-info'>
+											<div className='info-title'>{v.title}</div>
 										</div>
 									</div>
-								</a>
-							);
-						})}
-					</div>
-				</>
-			) : (
-				<></>
-			)}
-
-			{/* {					
-movieList.map((_, i) => {
-						return (
-							<div key={i}>
-								<div className='d-flex px-1 pt-2 justify-content-between align-items-center heading-container'>
-									<h5 className='heading-content'>{_.title}</h5>
-									<a href={`${site_url}section/${_.id}`} className='heading-content'>
-										View All
-									</a>
 								</div>
-
-								{(() => {
-									if (_.sectionType === "1") {
-										if (_.posterType === "1") {
-											return <MultiLandscape videoData={_.videos} />;
-										} else {
-											return <MultiPotrait videoData={_.videos} sectionType={_.sectionType} posterType={_.posterType} />;
-										}
-									} else {
-										if (_.posterType === "1") {
-											return <SingleImage videoData={_.videos} />;
-										} else {
-											return <MultiPotrait videoData={_.videos} sectionType={_.sectionType} posterType={_.posterType} />;
-										}
-									}
-								})()}
-							</div>
+							</a>
 						);
-					} else {
-						return null;
-					}
-				})} */}
+					})}
+				</Container>
+			) : (
+				<Container className='d-flex justify-content-center align-items-center mt-2 no-data-container'>
+					<div className='heading-content'>No Data Available Right Now!</div>
+				</Container>
+			)}
 		</Container>
 	);
 };

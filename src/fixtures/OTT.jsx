@@ -59,13 +59,13 @@ const Fixture = () => {
 		<Router>
 			<NavBar videoGenre={videoGenre} songGenre={songGenre} />
 			<Switch>
-				<Route exact path="/">
+				<Route exact path='/'>
 					<Home />
 				</Route>
-				<Route exact path="/movies/:id">
-					<Movies />
+				<Route exact path='/movies/:id'>
+					<Movies videoGenre={videoGenre} />
 				</Route>
-				<Route exact path="/videos/:id">
+				<Route exact path='/videos/:id'>
 					<Videos />
 				</Route>
 			</Switch>

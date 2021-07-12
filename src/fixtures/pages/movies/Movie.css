@@ -16,7 +16,7 @@
 	outline: none;
 	cursor: pointer;
 	min-width: 80px;
-	/* width: 188px; */
+	width: 165px;
 }
 .poster {
 	background-size: cover;
@@ -48,4 +48,9 @@
 	position: absolute;
 	bottom: 10px;
 	left: 15px;
+}
+
+.no-data-container {
+	min-height: 40vh;
+	background-color: #fefefe;
 }
